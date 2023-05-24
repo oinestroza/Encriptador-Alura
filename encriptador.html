@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encriptador Alura</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <img class="logo-alura" src="aluralogo.jfif" alt="Logo de Alura">
+    <h1>Encriptador de texto</h1>
+  </header>
+
+  <main>
+    <section>
+      <form>
+        <div>
+          <label>
+            <input type="radio" name="accion" value="encriptar" checked>
+            Encriptar
+          </label>
+          <label>
+            <input type="radio" name="accion" value="desencriptar">
+            Desencriptar
+          </label>
+        </div>
+        <div>
+          <label>
+            <h2>Texto a encriptar/desencriptar:</h2>
+            <textarea id="texto" rows="5" cols="50" required></textarea>
+          </label>
+        </div>
+        <div>
+          <button id="boton" type="button">Procesar</button>
+        </div>
+        <div>
+          <label>
+            <h3>Texto encriptado/desencriptado:</h3>
+            <textarea id="resultado" rows="5" cols="50" readonly></textarea>
+          </label>
+        </div>
+        <div>
+          <button id="boton-copiar">Copiar resultado</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>Desarrollado por Oscar Rolando Inestroza, Honduras</p>
+  </footer>
+
+  <script>
+    function encriptar(texto) {
+      texto = texto.replace(/e/g, "enter");
+      texto = texto.replace(/i/g, "imes");
+      texto = texto.replace(/a/g, "ai");
+      texto = texto.replace(/o/g, "ober");
+      texto = texto.replace(/u/g, "ufat");
+      return texto;
+    }
+
+    function desencriptar(texto) {
+      texto = texto.replace(/ufat/g, "u");
+      texto = texto.replace(/ober/g, "o");
+      texto = texto.replace(/ai/g, "a");
+      texto = texto.replace(/imes/g, "i");
+      texto = texto.replace(/enter/g, "e");
+      return texto;
+    }
+
+    const boton = document.getElementById("boton");
+    const botonCopiar = document.getElementById("boton-copiar");
+    const texto = document.getElementById("texto");
+    const resultado = document.getElementById("resultado");
+
+    boton.addEventListener("click", function() {
+      const accion = document.querySelector('input[name="accion"]:checked').value;
+      if (accion === "encriptar") {
+        resultado.value = encriptar(texto.value);
+      } else {
+        resultado.value = desencriptar(texto.value);
+      }
+    });
+
+    botonCopiar.addEventListener("click", function() {
+      resultado.select();
+      document.execCommand("copy");
+    });
+  </script>
+</body>
+</html>
